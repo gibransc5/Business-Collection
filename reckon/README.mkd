@@ -1,0 +1,34 @@
+#Rekon
+
+A visual browser for Basho's data store, riak, built as a riak app.
+
+This browser uses list buckets and list keys; operations that are known to
+be expensive on any bucket with any sufficient number of keys.  As such; this tool is intended for use within ***local (application development)*** environments only.
+
+Rekon should ***NOT*** be used on a production cluster ***EVER***.
+
+For something that can used against a production cluster, please see [Riak Control](https://github.com/basho/riak_control).
+
+## Installing
+
+### tl;dr
+`curl -s -L rekon.basho.com | sh`
+
+### Quick Install
+Download and install using `curl -s -L rekon.basho.com | sh` or 
+`curl -s -L rekon.basho.com | node=node-addr:port sh` to specify the node.
+
+### Manual Install
+Install locally using `./install.sh` or `./install.sh node-addr:port` 
+to specify the node.
+
+## Usage
+
+Once installed navigate to http://node-addr:port/buckets/rekon/keys/go.
+
+If you have installed riak on the standard port this will be [http://127.0.0.1:8098/buckets/rekon/keys/go](http://127.0.0.1:8098/buckets/rekon/keys/go).
+
+## Known Issues
+ * Editing a riak value does not retain 2i index information.
+ * Lots of list buckets, lots of list keys.
+ * As listing buckets/keys is quite expensive, you should install Varnish to offload Rekon (see the included ./varnish directory)
