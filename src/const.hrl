@@ -1,0 +1,14 @@
+
+-define(BucketBusiness, "business-list").
+-define(Id, "id").
+-define(Uuid, "uuid").
+-define(Name, "name").
+-define(Add1, "address").
+-define(Add2, "address2").
+-define(City, "city").
+-define(State, "state").
+-define(Zip, "zip").
+-define(Country, "country").
+-define(Phone, "phone").
+-define(Website, "website").
+-define(Created_at, "created_at").
