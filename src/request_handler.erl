@@ -9,8 +9,16 @@
 init(_Route, _Req, State) ->
     {ok, State}.
 
-get("/", _Req, State) ->
-    {<<"Hello, leptus!">>, State};
+get("/businesses/", _Req, State) ->
+    {_BusinessesIds, _NextPage}  = buscol_search:search_businesses([]),
+    Response = [{<<"businesses">>,_BusinessesIds },{<<"next_page">>, _NextPage}],
+    {200, {json, Response},State};
+
+get("/businesses/:next_id", _Req, State) ->
+    NextId = leptus_req:param(_Req, next_id),
+    {_BusinessesIds, _NextPage}  = buscol_search:search_businesses(NextId),
+    Response = [{<<"businesses">>,_BusinessesIds },{<<"next_page">>, _NextPage}],
+    {200, {json, Response},State};
 
 get("/business/:id", Req, State) ->
     Id = leptus_req:param(Req, id),
