@@ -1,4 +1,5 @@
--define(BUSINESS_NOT_FOUND, [{<<"error_message">>,<<"not_found">>}]).
+-define(BUSINESS_NOT_FOUND, [{<<"error_message">>,<<"business_not_found">>}]).
+-define(BUSINESSES_NOT_FOUND, [{<<"error_message">>,<<"page_not_found">>}]).
 -define(BucketBusiness, <<"business-list">>).
 -define(Id,<<"id">>).
 -define(Uuid, <<"uuid">>).
