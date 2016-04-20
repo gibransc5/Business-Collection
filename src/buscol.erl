@@ -174,3 +174,26 @@ set_bucket_indexed_json(Bucket, Key, Data, Indexes) ->
     Result = riakc_pb_socket:put(Pid, IndexedObj),
     disconnect(Pid),
     Result.
+
+get_bucket_json(Name, Key) ->
+    Pid = connect(),
+    {Result, Obj}  = riakc_pb_socket:get(Pid, Name, Key),
+    Val = case Obj of
+        notfound ->
+            [];
+        _->
+            Data = riakc_obj:get_value(Obj),
+            jsx:decode(Data)
+    end,
+    disconnect(Pid),
+    {Result, Val}.
+
+get_business(Id)->
+    case get_bucket_json(?BucketBusiness, Id) of
+        {error, []} ->
+            {404, ?BUSINESS_NOT_FOUND};
+        _->
+            {ok, Business} = get_bucket_json(?BucketBusiness, Id),
+            {200, Business}
+    end.
+    

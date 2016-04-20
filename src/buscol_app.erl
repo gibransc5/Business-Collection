@@ -10,6 +10,9 @@
 %% ===================================================================
 
 start(_StartType, _StartArgs) ->
+    ssl:start(),
+    application:start(inets),
+    leptus:start_listener(http, [{'_', [{request_handler, undef}]}], []),
     buscol_sup:start_link().
 
 stop(_State) ->
